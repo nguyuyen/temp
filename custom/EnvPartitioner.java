@@ -12,12 +12,12 @@ import org.apache.kafka.clients.producer.Partitioner;
 
 public class EnvPartitioner implements Partitioner {
 
-    @Override
+    // @Override
     public void configure(Map<String, ?> configs) {
         // Do nothing, not necessary right now
     }
 
-    @Override
+    // @Override
     public int partition(String topic, Object key, byte[] keyBytes, Object value, byte[] valueBytes, Cluster cluster) {
         // TODO: implement the partitioner
         if (topic == "air") {
@@ -36,7 +36,7 @@ public class EnvPartitioner implements Partitioner {
         }
     }
 
-    @Override
+    // @Override
     public void close() {
         // Do nothing, not necessary right now
     }

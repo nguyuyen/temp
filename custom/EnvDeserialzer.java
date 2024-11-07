@@ -15,12 +15,12 @@ public class EnvDeserialzer implements Deserializer<Environment> {
     final String ENCODING = "UTF8";
     final SimpleDateFormat DF = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
-    @Override
+    // @Override
     public void configure(Map<String, ?> configs, boolean isKey) {
         // Do nothing, not necessary right now
     }
 
-    @Override
+    // @Override
     public Environment deserialize(String topic, byte[] data) {
         // TODO: implement the deserialize
         try {
@@ -59,7 +59,7 @@ public class EnvDeserialzer implements Deserializer<Environment> {
         }
     }
 
-    @Override
+    // @Override
     public void close() {
         // Do nothing, not necessary right now
     }

@@ -2,7 +2,6 @@ package datatype;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.text.SimpleDateFormat;
 
 public class Air implements Environment {
     // TODO: declare all attributes
