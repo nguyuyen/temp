@@ -38,7 +38,6 @@ public class Air implements Environment {
         so2 = list_.get(9);
     }
 
-    @Override
     public String toStr() {
         // TODO: Convert to string
         return type + ":<" + time + "," + station + "," + temperature + "," + moisture + "," + light + "," + wind + ","

@@ -33,7 +33,6 @@ public class Earth implements Environment {
         voltage = list_.get(7);
     }
 
-    @Override
     public String toStr() {
         // TODO: Convert to string
         return type + ":<" + time + "," + station + "," + moisture + "," + temperature + "," + salinity + "," + ph + ","

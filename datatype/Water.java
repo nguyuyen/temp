@@ -25,7 +25,6 @@ public class Water implements Environment {
         salinity = list_.get(3);
     }
 
-    @Override
     public String toStr() {
         // TODO: Convert to string
         return type + ":<" + time + "," + station + "," + ph + "," + d_o + "," + temperature + "," + salinity + ">";
