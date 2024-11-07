@@ -31,6 +31,7 @@ public class EnvPartitioner implements Partitioner {
             Water water = (Water) value;
             if (water.station == "SVDT2") return 0;
         }
+        return -1;
     }
 
     // @Override
