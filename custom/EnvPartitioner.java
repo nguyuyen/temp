@@ -24,15 +24,12 @@ public class EnvPartitioner implements Partitioner {
             Air air = (Air) value;
             if (air.station == "SVDT1") return 0;
             else if (air.station == "SVDT3") return 1;
-            else throw new Exception("Error Air station");
         } else if (topic == "earth") {
             Earth earth = (Earth) value;
             if (earth.station == "SVDT3") return 0;
-            else throw new Exception("Error Earth station");
         } else if (topic == "water") {
             Water water = (Water) value;
             if (water.station == "SVDT2") return 0;
-            else throw new Exception("Error Water station");
         }
     }
 
