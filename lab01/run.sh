@@ -29,6 +29,9 @@ case "$1" in
     producer)
         producer
         ;;
+    consumer)
+        consumer
+        ;;
     clean)
         clean
         ;;
