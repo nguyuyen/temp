@@ -1,41 +1,10 @@
 #!/bin/bash
 
-EXE_DIR="classes"
-SRC=$(find . -name "*.java")
-
-KAFKA="$KAFKA_HOME/libs/*"
-
-compile() {
-    mkdir -p "$EXE_DIR"
-    javac -d "$EXE_DIR" -cp "$KAFKA" "$SRC"
-}
-
-producer() {
-    java -cp "$EXE_DIR:$KAFKA" Producer
-}
-
-consumer() {
-    java -cp "$EXE_DIR:$KAFKA" Consumer
-}
-
-clean() {
-    rm -rf "$EXE_DIR"
-}
-
-case "$1" in
-    compile)
-        compile
-        ;;
-    producer)
-        producer
-        ;;
-    consumer)
-        consumer
-        ;;
-    clean)
-        clean
-        ;;
-    *)
-        echo "$SRC"
-        ;;
-esac
+if [[ $1 = "compile" ]]; then
+    rm -rf classes/*
+    javac -d classes/ -cp "/home/trieu/kafka/libs/*" Consumer.java Producer.java datatype/* custom/*
+elif [[ $1 = "producer" ]]; then
+    java -cp "/home/trieu/kafka/libs/*:classes/" Producer
+elif [[ $1 = "consumer" ]]; then
+    java -cp "/home/trieu/kafka/libs/*:classes/" Consumer $2
+fi
