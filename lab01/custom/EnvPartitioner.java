@@ -25,14 +25,17 @@ public class EnvPartitioner implements Partitioner {
             System.out.println(air.station);
             if (air.station == "SVDT1") return 0;
             else if (air.station == "SVDT3") return 1;
+            System.out.println("hmm");
         } else if (topic == "earth") {
             Earth earth = (Earth) value;
             System.out.println(earth.station);
             if (earth.station == "SVDT3") return 0;
+            System.out.println("hmm");
         } else if (topic == "water") {
             Water water = (Water) value;
             System.out.println(water.station);
             if (water.station == "SVDT2") return 0;
+            System.out.println("hmm");
         }
         return -1;
     }
