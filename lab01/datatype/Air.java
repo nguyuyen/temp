@@ -11,8 +11,7 @@ public class Air implements Environment {
     public float temperature;
     public float moisture;
     public float light;
-    public float wind;
-    public float direction;
+    public float wind_direction;
     public float pm2_5;
     public float pm10;
     public float co;
@@ -28,19 +27,18 @@ public class Air implements Environment {
         temperature = list_.get(0);
         moisture = list_.get(1);
         light = list_.get(2);
-        wind = list_.get(3);
-        direction = list_.get(4);
-        pm2_5 = list_.get(5);
-        pm10 = list_.get(6);
-        co = list_.get(7);
-        nox = list_.get(8);
-        so2 = list_.get(9);
+        wind_direction = list_.get(3);
+        pm2_5 = list_.get(4);
+        pm10 = list_.get(5);
+        co = list_.get(6);
+        nox = list_.get(7);
+        so2 = list_.get(8);
     }
 
     public String toStr() {
         // TODO: Convert to string
-        return type + ":<" + time + "," + station + "," + temperature + "," + moisture + "," + light + "," + wind + ","
-                + direction + "," + pm2_5 + "," + pm10 + "," + co + "," + nox + "," + so2 + ">";
+        return type + ":<" + time + "," + station + "," + temperature + "," + moisture + "," + light + ","
+                + wind_direction + "," + pm2_5 + "," + pm10 + "," + co + "," + nox + "," + so2 + ">";
     }
 
     public String getType() {
@@ -60,8 +58,7 @@ public class Air implements Environment {
         list.add(temperature);
         list.add(moisture);
         list.add(light);
-        list.add(wind);
-        list.add(direction);
+        list.add(wind_direction);
         list.add(pm2_5);
         list.add(pm10);
         list.add(co);
