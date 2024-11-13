@@ -12,7 +12,7 @@ import datatype.Environment;
 
 public class Consumer {
     final static String GROUPID = "java-consumer-group";
-    final static String URL = "192.168.26.220";   // TODO: replace by your Kafka address
+    final static String URL = "192.168.26.220:9092";   // TODO: replace by your Kafka address
 
     public static void main(String[] args) throws Exception {
         final var conf = new Properties();

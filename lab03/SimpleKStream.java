@@ -1,6 +1,9 @@
 import java.util.*;
 import org.apache.kafka.streams.*;
 import org.apache.kafka.streams.kstream.*;
+
+import datatype.Environment;
+
 import org.apache.kafka.common.serialization.*;
 
 public class SimpleKStream {
@@ -24,6 +27,30 @@ public class SimpleKStream {
                 System.out.println(" Shutting down ... ");
                 stream.close();
             }
+        });
+        streams.start();
+
+        ///
+        /// 
+        /// 
+        
+         // Config is the same
+        StreamsBuilder builder = new StreamsBuilder();
+        KStream<String, Environment> stream_1 = builder.<String, Environment>stream("<topic name 1>").selectKey((k, v)-> v.time.toString());
+        KStream<String, Integer> stream_2 = builder.<String, Environment>stream("<topic name 2>").selectKey((k, v)-> v.time.toString()).mapValues(v-> v.value);
+        KStream<String, String> join_stream = stream_1.join(stream_2, (left, right)-> {
+        return String.format("station: %s value=%s", left.station, left.value + right);
+        }, JoinWindows.ofTimeDifferenceWithNoGrace(Duration.ofMillis(1000)),
+        // Each record waits record from other stream at most 1s
+        StreamJoined.with(Serdes.String(), new EnvSerde(), Serdes.Integer());
+        // StreamJoined.with(<Key datatype>, <stream 1 Value datatype>, <stream 2 Value datatype>)
+        join_stream.foreach((k, v)-> System.out.println(k + ": " + v));
+        KafkaStreams streams = new KafkaStreams(builder.build(), conf);
+        Runtime.getRuntime().addShutdownHook(new Thread() {
+        public void run() {
+        System.out.println("Shutting down...");
+        stream.close();
+        }
         });
         streams.start();
     }
