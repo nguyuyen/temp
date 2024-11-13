@@ -19,17 +19,17 @@ public class EnvPartitioner implements Partitioner {
     // @Override
     public int partition(String topic, Object key, byte[] keyBytes, Object value, byte[] valueBytes, Cluster cluster) {
         // TODO: implement the partitioner
-        if (topic == "air") {
+        if (topic.equals("air")) {
             Air air = (Air) value;
             if (air.station.equals("SVDT1"))
                 return 0;
             else if (air.station.equals("SVDT3"))
                 return 1;
-        } else if (topic == "earth") {
+        } else if (topic.equals("earth")) {
             Earth earth = (Earth) value;
             if (earth.station.equals("SVDT3"))
                 return 0;
-        } else if (topic == "water") {
+        } else if (topic.equals("water")) {
             Water water = (Water) value;
             if (water.station.equals("SVDT2"))
                 return 0;

@@ -5,22 +5,21 @@ import java.util.Date;
 
 public class Earth implements Environment {
     // TODO: declare all attributes
-    public String type = "Earth";
     public Date time;
     public String station;
-    public float moisture;
-    public float temperature;
-    public float salinity;
-    public float ph;
-    public float water_root;
-    public float water_leaf;
-    public float water_level;
-    public float voltage;
+    public String moisture;
+    public String temperature;
+    public String salinity;
+    public String ph;
+    public String water_root;
+    public String water_leaf;
+    public String water_level;
+    public String voltage;
 
     public Earth() {
     }
 
-    public Earth(Date time_, String station_, ArrayList<Float> list_) {
+    public Earth(Date time_, String station_, ArrayList<String> list_) {
         time = time_;
         station = station_;
         moisture = list_.get(0);
@@ -35,12 +34,12 @@ public class Earth implements Environment {
 
     public String toStr() {
         // TODO: Convert to string
-        return type + ":<" + time + "," + station + "," + moisture + "," + temperature + "," + salinity + "," + ph + ","
+        return "Earth:<" + time + "," + station + "," + moisture + "," + temperature + "," + salinity + "," + ph + ","
                 + water_root + "," + water_leaf + "," + water_level + "," + voltage + ">";
     }
 
     public String getType() {
-        return type;
+        return "earth";
     }
 
     public Date getTime() {
@@ -51,8 +50,8 @@ public class Earth implements Environment {
         return station;
     }
 
-    public ArrayList<Float> getList() {
-        ArrayList<Float> list = new ArrayList<Float>();
+    public ArrayList<String> getList() {
+        ArrayList<String> list = new ArrayList<String>();
         list.add(moisture);
         list.add(temperature);
         list.add(salinity);

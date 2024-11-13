@@ -5,23 +5,22 @@ import java.util.Date;
 
 public class Air implements Environment {
     // TODO: declare all attributes
-    public String type = "Air";
     public Date time;
     public String station;
-    public float temperature;
-    public float moisture;
-    public float light;
-    public float wind_direction;
-    public float pm2_5;
-    public float pm10;
-    public float co;
-    public float nox;
-    public float so2;
+    public String temperature;
+    public String moisture;
+    public String light;
+    public String wind_direction;
+    public String pm2_5;
+    public String pm10;
+    public String co;
+    public String nox;
+    public String so2;
 
     public Air() {
     }
 
-    public Air(Date time_, String station_, ArrayList<Float> list_) {
+    public Air(Date time_, String station_, ArrayList<String> list_) {
         time = time_;
         station = station_;
         temperature = list_.get(0);
@@ -37,12 +36,12 @@ public class Air implements Environment {
 
     public String toStr() {
         // TODO: Convert to string
-        return type + ":<" + time + "," + station + "," + temperature + "," + moisture + "," + light + ","
+        return "Air :<" + time + "," + station + "," + temperature + "," + moisture + "," + light + ","
                 + wind_direction + "," + pm2_5 + "," + pm10 + "," + co + "," + nox + "," + so2 + ">";
     }
 
     public String getType() {
-        return type;
+        return "air";
     }
 
     public Date getTime() {
@@ -53,8 +52,8 @@ public class Air implements Environment {
         return station;
     }
 
-    public ArrayList<Float> getList() {
-        ArrayList<Float> list = new ArrayList<Float>();
+    public ArrayList<String> getList() {
+        ArrayList<String> list = new ArrayList<String>();
         list.add(temperature);
         list.add(moisture);
         list.add(light);

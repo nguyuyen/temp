@@ -8,5 +8,5 @@ public interface Environment {
     public String getType();
     public Date getTime();
     public String getStation();
-    public ArrayList<Float> getList();
+    public ArrayList<String> getList();
 }

@@ -76,9 +76,9 @@ public class Producer {
                 air_line = sc_air.nextLine();
                 air_next_line = sc_air.hasNextLine();
                 String[] air_values = air_line.split(",");
-                ArrayList<Float> list = new ArrayList<Float>();
+                ArrayList<String> list = new ArrayList<>();
                 for (int i = 2; i < air_values.length; i++) {
-                    list.add(Float.parseFloat(air_values[i]));
+                    list.add(air_values[i]);
                 }
                 Air air = new Air(DF.parse(air_values[0]), air_values[1], list);
                 ProducerRecord<String, Environment> air_record = new ProducerRecord<>("air", air);
@@ -88,9 +88,9 @@ public class Producer {
                 earth_line = sc_earth.nextLine();
                 earth_next_line = sc_earth.hasNextLine();
                 String[] earth_values = earth_line.split(",");
-                ArrayList<Float> list = new ArrayList<Float>();
+                ArrayList<String> list = new ArrayList<String>();
                 for (int i = 2; i < earth_values.length; i++) {
-                    list.add(Float.parseFloat(earth_values[i]));
+                    list.add(earth_values[i]);
                 }
                 Earth earth = new Earth(DF.parse(earth_values[0]), earth_values[1], list);
                 ProducerRecord<String, Environment> earth_record = new ProducerRecord<>("earth", earth);
@@ -100,9 +100,9 @@ public class Producer {
                 water_line = sc_water.nextLine();
                 water_next_line = sc_water.hasNextLine();
                 String[] water_values = water_line.split(",");
-                ArrayList<Float> list = new ArrayList<Float>();
+                ArrayList<String> list = new ArrayList<>();
                 for (int i = 2; i < water_values.length; i++) {
-                    list.add(Float.parseFloat(water_values[i]));
+                    list.add(water_values[i]);
                 }
                 Water water = new Water(DF.parse(water_values[0]), water_values[1], list);
                 ProducerRecord<String, Environment> water_record = new ProducerRecord<>("water", water);

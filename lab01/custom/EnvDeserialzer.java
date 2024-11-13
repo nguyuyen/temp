@@ -3,12 +3,12 @@ package custom;
 import java.util.ArrayList;
 import java.util.Map;
 import java.nio.ByteBuffer;
+import java.security.spec.EncodedKeySpec;
 import java.text.SimpleDateFormat;
 
 import org.apache.commons.lang3.SerializationException;
 import org.apache.kafka.common.serialization.Deserializer;
 
-import datatype.Environment;
 import datatype.*;
 
 public class EnvDeserialzer implements Deserializer<Environment> {
@@ -43,15 +43,17 @@ public class EnvDeserialzer implements Deserializer<Environment> {
             byte[] station = new byte[buf.getInt()];
             buf.get(station);
             int size = buf.getInt();
-            ArrayList<Float> list = new ArrayList<Float>();
+            ArrayList<String> list = new ArrayList<>();
             for (int i = 0; i < size; i++) {
-                list.add(buf.getFloat());
+                byte[] mem = new byte[buf.getInt()];
+                buf.get(mem);
+                list.add(new String(mem, ENCODING));
             }
-            if (new String(type, ENCODING) == "Air")
+            if (topic.equals("air"))
                 return new Air(DF.parse(new String(time, ENCODING)), new String(station, ENCODING), list);
-            else if (new String(type, ENCODING) == "Earth")
+            else if (topic.equals("earth"))
                 return new Earth(DF.parse(new String(time, ENCODING)), new String(station, ENCODING), list);
-            else if (new String(type, ENCODING) == "Water")
+            else if (topic.equals("water"))
                 return new Water(DF.parse(new String(time, ENCODING)), new String(station, ENCODING), list);
             else throw new Exception("Error data.type.");
         } catch (Exception e) {

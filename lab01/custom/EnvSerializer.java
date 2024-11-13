@@ -44,9 +44,15 @@ public class EnvSerializer implements Serializer<Environment> {
             byte[] type = data.getType().getBytes("UTF8");
             byte[] time = DF.format(data.getTime()).getBytes("UTF8");
             byte[] station = data.getStation().getBytes("UTF8");
-            ArrayList<Float> list = data.getList();
+            ArrayList<String> list = data.getList();
             int len = Integer.BYTES + type.length + Integer.BYTES + time.length + Integer.BYTES + station.length
-                    + Integer.BYTES + Float.BYTES * list.size();
+                    + Integer.BYTES;
+            ArrayList<byte[]> byte_list = new ArrayList<>();
+            for (String mem : list) {
+                byte[] d = mem.getBytes("UTF8");
+                len += Integer.BYTES + d.length;
+                byte_list.add(d);
+            }
             ByteBuffer buf = ByteBuffer.allocate(len);
             buf.putInt(type.length);
             buf.put(type);
@@ -55,8 +61,9 @@ public class EnvSerializer implements Serializer<Environment> {
             buf.putInt(station.length);
             buf.put(station);
             buf.putInt(list.size());
-            for (int i = 0; i < list.size(); i++) {
-                buf.putFloat(list.get(i));
+            for (byte[] bs : byte_list) {
+                buf.putInt(bs.length);
+                buf.put(bs);
             }
             return buf.array();
         } catch (Exception e) {

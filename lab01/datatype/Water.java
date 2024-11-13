@@ -5,18 +5,17 @@ import java.util.Date;
 
 public class Water implements Environment {
     // TODO: declare all attributes
-    public String type = "Water";
     public Date time;
     public String station;
-    public float ph;
-    public float d_o;
-    public float temperature;
-    public float salinity;
+    public String ph;
+    public String d_o;
+    public String temperature;
+    public String salinity;
 
     public Water() {
     }
 
-    public Water(Date time_, String station_, ArrayList<Float> list_) {
+    public Water(Date time_, String station_, ArrayList<String> list_) {
         time = time_;
         station = station_;
         ph = list_.get(0);
@@ -27,11 +26,11 @@ public class Water implements Environment {
 
     public String toStr() {
         // TODO: Convert to string
-        return type + ":<" + time + "," + station + "," + ph + "," + d_o + "," + temperature + "," + salinity + ">";
+        return "Water:<" + time + "," + station + "," + ph + "," + d_o + "," + temperature + "," + salinity + ">";
     }
 
     public String getType() {
-        return type;
+        return "water";
     }
 
     public Date getTime() {
@@ -42,8 +41,8 @@ public class Water implements Environment {
         return station;
     }
 
-    public ArrayList<Float> getList() {
-        ArrayList<Float> list = new ArrayList<Float>();
+    public ArrayList<String> getList() {
+        ArrayList<String> list = new ArrayList<String>();
         list.add(ph);
         list.add(d_o);
         list.add(temperature);
