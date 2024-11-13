@@ -65,12 +65,15 @@ public class Producer {
         Scanner sc_air = new Scanner(new File("dataset/AIR2308.csv"));
         Scanner sc_earth = new Scanner(new File("dataset/EARTH2308.csv"));
         Scanner sc_water = new Scanner(new File("dataset/WATER2308.csv"));
+        String air_line = sc_air.nextLine();
+        String earth_line = sc_earth.nextLine();
+        String water_line = sc_water.nextLine();
         boolean air_next_line = sc_air.hasNextLine();
         boolean earth_next_line = sc_earth.hasNextLine();
         boolean water_next_line = sc_water.hasNextLine();
         while (air_next_line || earth_next_line || water_next_line) {
             if (air_next_line) {
-                String air_line = sc_air.nextLine();
+                air_line = sc_air.nextLine();
                 air_next_line = sc_air.hasNextLine();
                 String[] air_values = air_line.split(",");
                 ArrayList<Float> list = new ArrayList<Float>();
@@ -82,7 +85,7 @@ public class Producer {
                 producer.send(air_record);
             }
             if (earth_next_line) {
-                String earth_line = sc_earth.nextLine();
+                earth_line = sc_earth.nextLine();
                 earth_next_line = sc_earth.hasNextLine();
                 String[] earth_values = earth_line.split(",");
                 ArrayList<Float> list = new ArrayList<Float>();
@@ -94,7 +97,7 @@ public class Producer {
                 producer.send(earth_record);
             }
             if (water_next_line) {
-                String water_line = sc_water.nextLine();
+                water_line = sc_water.nextLine();
                 water_next_line = sc_water.hasNextLine();
                 String[] water_values = water_line.split(",");
                 ArrayList<Float> list = new ArrayList<Float>();
