@@ -145,7 +145,7 @@ public class SimpleKStream {
         Runtime.getRuntime().addShutdownHook(new Thread() {
             public void run() {
                 System.out.println("Shutting down...");
-                stream.close();
+                streams.close();
             }
         });
         streams.start();
