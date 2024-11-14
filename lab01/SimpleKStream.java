@@ -21,19 +21,19 @@ public class SimpleKStream {
         conf.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, EnvSerde.class.getName());
 
         StreamsBuilder builder = new StreamsBuilder();
-        KStream<String, String> airStream = builder.<String, Environment>stream("air")
-                .selectKey((k, v) -> v.getTime().toString()).mapValues(v -> v.toStr());
-        KStream<String, String> earthStream = builder.<String, Environment>stream("earth")
-                .selectKey((k, v) -> v.getTime().toString()).mapValues(v -> v.toStr());
-        KStream<String, String> waterStream = builder.<String, Environment>stream("water")
-                .selectKey((k, v) -> v.getTime().toString()).mapValues(v -> v.toStr());
+        KStream<String, Environment> airStream = builder.<String, Environment>stream("air")
+                .selectKey((k, v) -> v.getTime().toString());
+        KStream<String, Environment> earthStream = builder.<String, Environment>stream("earth")
+                .selectKey((k, v) -> v.getTime().toString());
+        KStream<String, Environment> waterStream = builder.<String, Environment>stream("water")
+                .selectKey((k, v) -> v.getTime().toString());
 
         KStream<String, String> join_stream = airStream.join(earthStream, (left, right) -> {
-            return String.format("left: %s ,right=%s", left.value, right.value);
+            return String.format("left: %s ,right=%s", left.value.toStr(), right.value.toStr());
         }, JoinWindows.ofTimeDifferenceWithNoGrace(Duration.ofMillis(1000)),
                 StreamJoined.with(Serdes.String(), new EnvSerde(), Serdes.String()))
                 .join(waterStream, (left, right) -> {
-                    return String.format("left: %s ,right=%s", left.value, right.value);
+                    return String.format("left: %s ,right=%s", left.value.toStr(), right.value.toStr());
                 }, JoinWindows.ofTimeDifferenceWithNoGrace(Duration.ofMillis(1000)),
                         StreamJoined.with(Serdes.String(), new EnvSerde(), Serdes.String()));
 

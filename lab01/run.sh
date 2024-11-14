@@ -2,7 +2,7 @@
 
 if [[ $1 = "compile" ]]; then
     rm -rf classes/*
-    javac -d classes/ -cp "/home/nguyuyen01/kafka/libs/*" Consumer.java Producer.java SimpleKStream.java datatype/* custom/*
+    javac -d classes/ -cp "/home/nguyuyen01/kafka/libs/*" Consumer.java Producer.java SimpleKStream.java datatype/* custom/* > log.txt 2>&1
 elif [[ $1 = "producer" ]]; then
     java -cp "/home/nguyuyen01/kafka/libs/*:classes/" Producer
 elif [[ $1 = "consumer" ]]; then
