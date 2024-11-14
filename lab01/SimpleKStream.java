@@ -29,11 +29,11 @@ public class SimpleKStream {
                 .selectKey((k, v) -> v.getTime().toString()).mapValues(v -> v.toStr());
 
         KStream<String, String> join_stream = airStream.join(earthStream, (left, right) -> {
-            return String.format("station: %s value=%s", left.s, left.value);
+            return String.format("left: %s ,right=%s", left.value, right.value);
         }, JoinWindows.ofTimeDifferenceWithNoGrace(Duration.ofMillis(1000)),
                 StreamJoined.with(Serdes.String(), new EnvSerde(), Serdes.String()))
                 .join(waterStream, (left, right) -> {
-                    return String.format("station: %s value=%s", left.s, left.value);
+                    return String.format("left: %s ,right=%s", left.value, right.value);
                 }, JoinWindows.ofTimeDifferenceWithNoGrace(Duration.ofMillis(1000)),
                         StreamJoined.with(Serdes.String(), new EnvSerde(), Serdes.String()));
 
