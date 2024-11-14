@@ -1,6 +1,7 @@
 import java.util.*;
 import org.apache.kafka.streams.*;
 import org.apache.kafka.streams.kstream.*;
+import java.time.*;
 
 import datatype.Environment;
 import datatype.*;
@@ -122,13 +123,13 @@ public class SimpleKStream {
         StreamsBuilder builder = new StreamsBuilder();
         KStream<String, Environment> stream_air = builder.<String, Environment>stream("air")
                 .selectKey((k, v) -> v.time.toString())
-                .mapValues(v -> new Air(v.time, v.station, process_data_air(v.getList())));
+                .mapValues(v -> new Air(v.getTime, v.getStation, process_data_air(v.getList())));
         KStream<String, Environment> stream_earth = builder.<String, Environment>stream("earth")
                 .selectKey((k, v) -> v.time.toString())
-                .mapValues(v -> new Earth(v.time, v.station, process_data_earth(v.getList())));
+                .mapValues(v -> new Earth(v.getTime, v.getStation, process_data_earth(v.getList())));
         KStream<String, Environment> stream_water = builder.<String, Environment>stream("water")
                 .selectKey((k, v) -> v.time.toString())
-                .mapValues(v -> new Water(v.time, v.station, process_data_water(v.getList())));
+                .mapValues(v -> new Water(v.getTime, v.getStation, process_data_water(v.getList())));
         KStream<String, String> join_stream = stream_air.join(stream_earth, (left, right) -> {
             return String.format("key: %s, value=%s", left.toStr(), right.toStr());
         }, JoinWindows.ofTimeDifferenceWithNoGrace(Duration.ofMillis(1000)),
