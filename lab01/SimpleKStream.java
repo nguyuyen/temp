@@ -3,6 +3,7 @@ import org.apache.kafka.streams.*;
 import org.apache.kafka.streams.kstream.*;
 
 import datatype.Environment;
+import datatype.*;
 
 import org.apache.kafka.common.serialization.*;
 

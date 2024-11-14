@@ -1,5 +1,6 @@
 import java.util.*;
 import org.apache.kafka.common.serialization.*;
+import custom.*;
 
 public class EnvSerde implements Serde<Environment> {
     @Override
