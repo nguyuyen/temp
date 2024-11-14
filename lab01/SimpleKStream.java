@@ -2,7 +2,7 @@ import java.util.*;
 import org.apache.kafka.streams.*;
 import org.apache.kafka.streams.kstream.*;
 
-import custom.EnvSerde;
+import custom.*;
 
 import java.time.*;
 
@@ -21,7 +21,7 @@ public class SimpleKStream {
         conf.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, EnvSerde.class.getName());
 
         StreamsBuilder builder = new StreamsBuilder();
-        KStream<String, Air> airStream = builder.stream("air");
+        KStream<String, Air> airStream = builder.stream("air").selectKey((k,v)->v.getTime().toString());
         // KStream<String, Earth> earthStream = builder.stream("earth");
         // KStream<String, Water> waterStream = builder.stream("water");
 
@@ -237,5 +237,5 @@ public class SimpleKStream {
         // }
         // });
         // streams.start();
-    }
+    // }
 }
