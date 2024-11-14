@@ -29,19 +29,17 @@ public class SimpleKStream {
                 .selectKey((k, v) -> v.getTime().toString());
 
         KStream<String, String> join_stream = airStream.join(earthStream, (left, right) -> {
-            return String.format("left: %s ,right=%s", left.value.toStr(), right.value.toStr());
-        }, JoinWindows.ofTimeDifferenceWithNoGrace(Duration.ofMillis(1000)),
-                StreamJoined.with(Serdes.String(), new EnvSerde(), Serdes.String()))
+            return String.format("left: %s ,right=%s", left.toStr(), right.toStr());
+        }, JoinWindows.ofTimeDifferenceWithNoGrace(Duration.ofMillis(1000)))
                 .join(waterStream, (left, right) -> {
-                    return String.format("left: %s ,right=%s", left.value.toStr(), right.value.toStr());
-                }, JoinWindows.ofTimeDifferenceWithNoGrace(Duration.ofMillis(1000)),
-                        StreamJoined.with(Serdes.String(), new EnvSerde(), Serdes.String()));
+                    return String.format("left: %s ,right=%s", left, right.toStr());
+                }, JoinWindows.ofTimeDifferenceWithNoGrace(Duration.ofMillis(1000)));
 
         join_stream.foreach((k, v) -> System.out.println(k + ": " + v));
 
-        airStream.foreach((key, value) -> {
-            System.out.println("Air Stream - Key: " + key + ", Value: " + value);
-        });
+        // airStream.foreach((key, value) -> {
+        // System.out.println("Air Stream - Key: " + key + ", Value: " + value);
+        // });
         // earthStream.foreach((key, value) -> {
         // System.out.println("Earth Stream - Key: " + key + ", Value: " + value);
         // });
